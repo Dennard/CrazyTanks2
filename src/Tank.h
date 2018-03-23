@@ -20,8 +20,18 @@ public:
   void moveForward();
   void turnLeft();
   void turnRight();
-private:
+  bool isCollisionCausedForward(std::vector<GameObject*>& wallVect, 
+                                std::vector<GameObject*>& tankVect);
+  bool isCollisionCausedBackward(std::vector<GameObject*>& wallVect,
+                                 std::vector<GameObject*>& tankVect);
+  bool isCollisionCausedLeft(std::vector<GameObject*>& wallVect,
+                             std::vector<GameObject*>& tankVect);
+  bool isCollisionCausedRight(std::vector<GameObject*>& wallVect,
+                              std::vector<GameObject*>& tankVect);
+protected:
   Gdiplus::Rect cannonRect;
+  const int SIZE = 60;
+private:
 };
 
 

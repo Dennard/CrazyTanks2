@@ -1,25 +1,40 @@
+#include <memory>
+#include <thread>
+
 #include "GameController.h"
 #include "GraphicsController.h"
 #include "WallsGeneration.h"
-
+#include "TanksGeneration.h"
 
 int main() {
   system("mode con lines=44 cols=75");
-  ULONG_PTR m_gdiplusToken;
-  Gdiplus::GdiplusStartupInput gdiplusStartupInput;
-  Gdiplus::GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, nullptr);
+  GraphicsController graphicController;
+  GameController gameController;
+  Player player;
 
-  GraphicsController tmp;
-  GameController gmc;
-  Gdiplus::Graphics graphics(tmp.hdc);
+  Gdiplus::Graphics graphics(graphicController.hdc);
+
   Generator* ptr = new Generator(new WallsGeneration);
-  ptr->generateGameObjects(12, gmc.wallVect);
+  ptr->generateGameObjects(12, gameController.wallVect,
+                               gameController.tankVect);
+  delete ptr;
+  ptr = new Generator(new TanksGeneration);
+  ptr->generateGameObjects(5, gameController.wallVect,
+                              gameController.tankVect);
+  delete ptr;
+  
+  std::thread first_thread(GameController::getControlKeys, 
+                                  std::ref(player), 
+                                  std::ref(gameController.wallVect), 
+                                  std::ref(gameController.tankVect));
+  first_thread.detach();
 
   while (true) {
-    tmp.DrawFrame(graphics, gmc.wallVect);
-    Sleep(500);
+    graphicController.DrawFrame(graphics, 
+                                gameController.wallVect,
+                                gameController.tankVect,
+                                player);
+    Sleep(33);
   }
- 
-  Gdiplus::GdiplusShutdown(m_gdiplusToken);
   return 0;
 }

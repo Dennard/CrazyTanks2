@@ -9,7 +9,8 @@ WallsGeneration::~WallsGeneration()
 }
 
 void WallsGeneration::generateGameObjects(int count,
-                                         std::vector<GameObject*>& objVect)
+                                         std::vector<GameObject*>& objVect,
+                                         std::vector<GameObject*>& tankVect)
 {
   bool flag = false;
   for (int i = 0; i < count; i++) {

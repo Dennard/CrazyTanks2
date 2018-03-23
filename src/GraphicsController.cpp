@@ -4,25 +4,38 @@ GraphicsController::GraphicsController()
 {
   hwnd = GetConsoleWindow();
   hdc = GetDC(hwnd);
+  Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+  Gdiplus::GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, nullptr);
+  blackBrush = new Gdiplus::SolidBrush(Gdiplus::Color(0, 0, 0));
+  whiteBrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 255, 255));
+  transpBrush = new Gdiplus::SolidBrush(Gdiplus::Color(100, 0, 0, 0));
+  redBrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 0, 0));
+  blueBrush = new Gdiplus::SolidBrush(Gdiplus::Color(0, 0, 255));
 }
 
 GraphicsController::~GraphicsController()
 {
-
+  delete blackBrush;
+  delete transpBrush;
+  delete whiteBrush;
+  delete redBrush;
+  delete blueBrush;
+  Gdiplus::GdiplusShutdown(m_gdiplusToken);
 }
 
 void GraphicsController::DrawFrame(Gdiplus::Graphics & graphics,
-                                 std::vector<GameObject*>& wallvect)
+                                 std::vector<GameObject*>& wallvect,
+                                 std::vector<GameObject*>& tankvect,
+                                  Player& player)
 {
-  static const Gdiplus::SolidBrush blackBrush(Gdiplus::Color(0, 0, 0));
-  static const Gdiplus::SolidBrush whiteBrush(Gdiplus::Color(255, 255, 255));
-  static const Gdiplus::SolidBrush transpBrush(Gdiplus::Color(100,0, 0, 0));
-  static const Gdiplus::SolidBrush redBrush(Gdiplus::Color(255, 0, 0));
-
-  graphics.FillRectangle(&whiteBrush, 0, 0, 600, 600);
-  graphics.FillRectangle(&transpBrush, 0, 601,600,100);
+  graphics.FillRectangle(whiteBrush, 0, 0, 600, 600);
+  graphics.FillRectangle(transpBrush, 0, 601,600,100);
   for (int i = 0; i < wallvect.size(); i++) {
-    graphics.FillRectangle(&transpBrush, wallvect[i]->getMask());
-    graphics.FillRectangle(&blackBrush, wallvect[i]->getRect());
+    graphics.FillRectangle(blackBrush, wallvect[i]->getRect());
   }
+  for (int i = 0; i < tankvect.size(); i++) {
+    graphics.FillRectangle(redBrush, tankvect[i]->getRect());
+  }
+  graphics.FillRectangle(transpBrush, player.getRect());
+  graphics.FillRectangle(blueBrush, player.getCannon());
 }

@@ -15,17 +15,28 @@ Gdiplus::Rect& GameObject::getMask()
 
 GameObject * GameObject::createGameObject(GameObjectType type)
 {
-  GameObject* p = nullptr;
+  Tank* tank = nullptr;
+  Wall* wall = nullptr;
+  Missile* missile = nullptr;
   switch (type) {
-  case WALL:
-    p = new Wall();
-    break;
-  case TANK:
-    p = new Tank();
-    break;
-  case MISSILE:
-    p = new Missile();
-    break;
+  case WALL: {
+    wall = new Wall();
+    delete tank;
+    delete missile;
+    return wall;
   }
-  return p;
+  case TANK: {
+    tank = new Tank();
+    delete wall;
+    delete missile;
+    return tank;
+  }
+  case MISSILE: {
+    missile = new Missile();
+    delete tank;
+    delete wall;
+    return missile;
+  }
+  }
+
 }
