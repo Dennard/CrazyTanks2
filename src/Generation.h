@@ -7,8 +7,8 @@
 class Generation {
 public:
   virtual void generateGameObjects(int count,
-                                  std::vector<GameObject*>& objVect, 
-                                  std::vector<GameObject*>& tankVect) = 0;
+                                  std::vector<GameObject>& objVect, 
+                                  std::vector<GameObject>& tankVect) = 0;
 };
 
 #endif

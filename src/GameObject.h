@@ -20,7 +20,7 @@ public:
   Gdiplus::Rect& getRect();
   Gdiplus::Rect& getMask();
   std::vector<Gdiplus::Rect> parts;
-  static GameObject* createGameObject(GameObjectType type);
+  static GameObject& createGameObject(GameObjectType type);
 protected:
   Gdiplus::Rect objectRect;
   Gdiplus::Rect objectMask;

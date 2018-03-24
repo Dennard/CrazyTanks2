@@ -5,9 +5,10 @@
 #include "GraphicsController.h"
 #include "WallsGeneration.h"
 #include "TanksGeneration.h"
+//#include "TanksGeneration.cpp"
 
 int main() {
-  system("mode con lines=44 cols=75");
+  system("mode con lines=50 cols=75");
   GraphicsController graphicController;
   GameController gameController;
   Player player;
@@ -15,7 +16,7 @@ int main() {
   Gdiplus::Graphics graphics(graphicController.hdc);
 
   Generator* ptr = new Generator(new WallsGeneration);
-  ptr->generateGameObjects(12, gameController.wallVect,
+  ptr->generateGameObjects(15, gameController.wallVect,
                                gameController.tankVect);
   delete ptr;
   ptr = new Generator(new TanksGeneration);

@@ -1,4 +1,4 @@
-#include "GameObject.h"
+//#include "GameObject.h"
 #include "Wall.h"
 #include "Tank.h"
 #include "Missile.h"
@@ -13,30 +13,25 @@ Gdiplus::Rect& GameObject::getMask()
   return objectMask;
 }
 
-GameObject * GameObject::createGameObject(GameObjectType type)
+GameObject& GameObject::createGameObject(GameObjectType type)
 {
-  Tank* tank = nullptr;
-  Wall* wall = nullptr;
-  Missile* missile = nullptr;
   switch (type) {
   case WALL: {
-    wall = new Wall();
-    delete tank;
-    delete missile;
+  //  wall = new Wall();
+    Wall wall;
     return wall;
   }
   case TANK: {
-    tank = new Tank();
-    delete wall;
-    delete missile;
-    return tank;
+    Tank* tank = new Tank();
+    //Tank tank;
+    return *tank;
   }
   case MISSILE: {
-    missile = new Missile();
-    delete tank;
-    delete wall;
+    Missile missile;
     return missile;
   }
+  default:
+    break;
   }
 
 }

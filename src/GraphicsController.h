@@ -6,20 +6,26 @@
 class GraphicsController {
 public:
   HDC hdc;
+  HDC mem_DC;
   HWND hwnd;
   GraphicsController();
   ~GraphicsController();
   void DrawFrame(Gdiplus::Graphics& graphics, 
-                std::vector<GameObject*>& wallvect,
-                std::vector<GameObject*>& tankvect,
-                  Player& player);
+                std::vector<GameObject>& wallvect,
+                std::vector<GameObject>& tankvect,
+                Player& player);
 private:
+
   ULONG_PTR m_gdiplusToken;
   const Gdiplus::SolidBrush* blackBrush;
   const Gdiplus::SolidBrush* whiteBrush;
   const Gdiplus::SolidBrush* transpBrush;
   const Gdiplus::SolidBrush* redBrush;
   const Gdiplus::SolidBrush* blueBrush;
+  const Gdiplus::Rect* upperBound;
+  const Gdiplus::Rect* downBound;
+  const Gdiplus::Rect* leftBound;
+  const Gdiplus::Rect* rightBound;
 };
 
 #endif

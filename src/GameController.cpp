@@ -2,7 +2,9 @@
 #include <conio.h>
 //#include "Wallsgenerating.h"
 
-void GameController::getControlKeys(Tank & player, std::vector<GameObject*>& wallVect, std::vector<GameObject*>& tankVect)
+void GameController::getControlKeys(Tank & player, 
+                                    std::vector<GameObject>& wallVect, 
+                                    std::vector<GameObject>& tankVect)
 {
   player.tankDirection = UP;
   char symbol = _getch();
