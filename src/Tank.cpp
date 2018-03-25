@@ -1,4 +1,5 @@
 #include "Tank.h"
+//#include "GraphicsController.h"
 
 Tank::Tank()
 {
@@ -53,6 +54,11 @@ bool Tank::isCollisionCausedForward(std::vector<GameObject>& wallVect,
     if (forwardRect.IntersectsWith(tankVect[i].getRect()))
       return true;
   }
+  if (forwardRect.Y <= 20 ||
+    forwardRect.Y >= 560 ||
+    forwardRect.X >= 560 ||
+    forwardRect.X <= 20)
+    return true;
   return false;
 }
 
@@ -71,6 +77,11 @@ bool Tank::isCollisionCausedBackward(std::vector<GameObject>& wallVect,
     if (forwardRect.IntersectsWith(tankVect[i].getRect()))
       return true;
   }
+  if (forwardRect.Y <= 20 ||
+    forwardRect.Y >= 560 ||
+    forwardRect.X >= 560 ||
+    forwardRect.X <= 20)
+    return true;
   return false;
 }
 
@@ -89,6 +100,11 @@ bool Tank::isCollisionCausedLeft(std::vector<GameObject>& wallVect,
     if (forwardRect.IntersectsWith(tankVect[i].getRect()))
       return true;
   }
+  if (forwardRect.Y <= 20 ||
+    forwardRect.Y >= 560 ||
+    forwardRect.X >= 560 ||
+    forwardRect.X <= 20)
+    return true;
   return false;
 }
 
@@ -107,5 +123,10 @@ bool Tank::isCollisionCausedRight(std::vector<GameObject>& wallVect,
     if (forwardRect.IntersectsWith(tankVect[i].getRect()))
       return true;
   }
+  if (forwardRect.Y <= 20 ||
+    forwardRect.Y >= 560 ||
+    forwardRect.X >= 560 ||
+    forwardRect.X <= 20)
+    return true;
   return false;
 }

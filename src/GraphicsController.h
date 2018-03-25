@@ -26,6 +26,8 @@ private:
   const Gdiplus::Rect* downBound;
   const Gdiplus::Rect* leftBound;
   const Gdiplus::Rect* rightBound;
+  const Gdiplus::Rect* mainField;
+  const Gdiplus::Rect* statField;
 };
 
 #endif
