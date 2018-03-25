@@ -5,15 +5,12 @@
 #include "GraphicsController.h"
 #include "WallsGeneration.h"
 #include "TanksGeneration.h"
-//#include "TanksGeneration.cpp"
 
 int main() {
   system("mode con lines=50 cols=75");
   GraphicsController graphicController;
   GameController gameController;
   Player player;
-
-  Gdiplus::Graphics graphics(graphicController.hdc);
 
   Generator* ptr = new Generator(new WallsGeneration);
   ptr->generateGameObjects(15, gameController.wallVect,
@@ -31,10 +28,11 @@ int main() {
   first_thread.detach();
 
   while (true) {
-    graphicController.DrawFrame(graphics, 
+    graphicController.DrawFrame( 
                                 gameController.wallVect,
                                 gameController.tankVect,
                                 player);
+    
     Sleep(33);
   }
   return 0;

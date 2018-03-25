@@ -2,10 +2,12 @@
 
 GraphicsController::GraphicsController()
 {
-  hwnd = GetConsoleWindow();
-  hdc = GetDC(hwnd);
   Gdiplus::GdiplusStartupInput gdiplusStartupInput;
   Gdiplus::GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, nullptr);
+  hwnd = GetConsoleWindow();
+  hdc = GetDC(hwnd);
+  mem_DC = CreateCompatibleDC(hdc);
+ // GetClientRect(hwnd, &rect);
   blackBrush = new Gdiplus::SolidBrush(Gdiplus::Color(0, 0, 0));
   whiteBrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 255, 255));
   transpBrush = new Gdiplus::SolidBrush(Gdiplus::Color(100, 0, 0, 0));
@@ -29,24 +31,29 @@ GraphicsController::~GraphicsController()
   Gdiplus::GdiplusShutdown(m_gdiplusToken);
 }
 
-void GraphicsController::DrawFrame(Gdiplus::Graphics & graphics,
+void GraphicsController::DrawFrame(
                                  std::vector<GameObject>& wallvect,
                                  std::vector<GameObject>& tankvect,
                                  Player& player)
 {
-  graphics.FillRectangle(whiteBrush, *mainField);
-  graphics.FillRectangle(transpBrush, *statField);
-  graphics.FillRectangle(transpBrush, *upperBound);
-  graphics.FillRectangle(transpBrush, *downBound);
-  graphics.FillRectangle(transpBrush, *leftBound);
-  graphics.FillRectangle(transpBrush, *rightBound);
+  Gdiplus::Graphics main(hdc);
+  Gdiplus::Bitmap buffer(600, 700, &main);
+  Gdiplus::Graphics buf(&buffer);
+  buf.FillRectangle(whiteBrush, *mainField);
+  buf.FillRectangle(transpBrush, *statField);
+  buf.FillRectangle(transpBrush, *upperBound);
+  buf.FillRectangle(transpBrush, *downBound);
+  buf.FillRectangle(transpBrush, *leftBound);
+  buf.FillRectangle(transpBrush, *rightBound);
   for (int i = 0; i < wallvect.size(); i++) {
-    graphics.FillRectangle(blackBrush, wallvect[i].getRect());
+    buf.FillRectangle(blackBrush, wallvect[i].getRect());
   }
   for (int i = 0; i < tankvect.size(); i++) {
-    graphics.FillRectangle(redBrush, tankvect[i].getRect());
+    buf.FillRectangle(redBrush, tankvect[i].getRect());
  //   graphics.FillRectangle(redBrush, tankvect[i].getC());
   }
-  graphics.FillRectangle(transpBrush, player.getCannon());
-  graphics.FillRectangle(blueBrush, player.getRect());
+  buf.FillRectangle(transpBrush, player.getCannon());
+  buf.FillRectangle(blueBrush, player.getRect());
+  main.DrawImage(&buffer, 0, 0, 0, 0, 600, 700,Gdiplus::UnitPixel);
+ // BitBlt(hdc, 0, 0,rect.right,rect.bottom, mem_DC, 0, 0, SRCCOPY);
 }

@@ -10,13 +10,14 @@ public:
   HWND hwnd;
   GraphicsController();
   ~GraphicsController();
-  void DrawFrame(Gdiplus::Graphics& graphics, 
+  void DrawFrame( 
                 std::vector<GameObject>& wallvect,
                 std::vector<GameObject>& tankvect,
                 Player& player);
 private:
 
   ULONG_PTR m_gdiplusToken;
+  RECT rect;
   const Gdiplus::SolidBrush* blackBrush;
   const Gdiplus::SolidBrush* whiteBrush;
   const Gdiplus::SolidBrush* transpBrush;
