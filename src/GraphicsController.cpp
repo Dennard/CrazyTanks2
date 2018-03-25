@@ -7,7 +7,6 @@ GraphicsController::GraphicsController()
   hwnd = GetConsoleWindow();
   hdc = GetDC(hwnd);
   mem_DC = CreateCompatibleDC(hdc);
- // GetClientRect(hwnd, &rect);
   blackBrush = new Gdiplus::SolidBrush(Gdiplus::Color(0, 0, 0));
   whiteBrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 255, 255));
   transpBrush = new Gdiplus::SolidBrush(Gdiplus::Color(100, 0, 0, 0));
@@ -55,5 +54,4 @@ void GraphicsController::DrawFrame(
   buf.FillRectangle(transpBrush, player.getCannon());
   buf.FillRectangle(blueBrush, player.getRect());
   main.DrawImage(&buffer, 0, 0, 0, 0, 600, 700,Gdiplus::UnitPixel);
- // BitBlt(hdc, 0, 0,rect.right,rect.bottom, mem_DC, 0, 0, SRCCOPY);
 }

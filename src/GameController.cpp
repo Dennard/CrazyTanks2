@@ -13,30 +13,30 @@ void GameController::getControlKeys(Tank & player,
     case 72://up
       if (player.tankDirection == UP) {
         if (player.isCollisionCausedForward(wallVect, tankVect) == false) {
-          player.getRect().Y -= 2;
-          player.getMask().Y -= 2;
-          player.getCannon().Y -= 2;
+          player.getRect().Y -= 1;
+          player.getMask().Y -= 1;
+          player.getCannon().Y -= 1;
         }
       }
       if (player.tankDirection == DOWN) {
         if (player.isCollisionCausedBackward(wallVect, tankVect) == false) {
-          player.getRect().Y += 2;
-          player.getMask().Y += 2;
-          player.getCannon().Y += 2;
+          player.getRect().Y += 1;
+          player.getMask().Y += 1;
+          player.getCannon().Y += 1;
         }
       }
       if (player.tankDirection == RIGHT) {
         if (player.isCollisionCausedRight(wallVect, tankVect) == false) {
-          player.getRect().X += 2;
-          player.getMask().X += 2;
-          player.getCannon().X += 2;
+          player.getRect().X += 1;
+          player.getMask().X += 1;
+          player.getCannon().X += 1;
         }
       }
       if (player.tankDirection == LEFT) {
         if (player.isCollisionCausedLeft(wallVect, tankVect) == false) {
-          player.getRect().X -= 2;
-          player.getMask().X -= 2;
-          player.getCannon().X -= 2;
+          player.getRect().X -= 1;
+          player.getMask().X -= 1;
+          player.getCannon().X -= 1;
         }
       }
       break;
@@ -100,7 +100,7 @@ void GameController::getControlKeys(Tank & player,
         break;
       }
       if (player.tankDirection == RIGHT) {
-        player.getCannon().X = player.getRect().X = 10;
+        player.getCannon().X = player.getRect().X - 10;
         player.getCannon().Y = player.getRect().Y;
         player.getCannon().Height = player.getRect().Height - 20;
         player.getCannon().Width = player.getRect().Width - 10;
@@ -110,30 +110,30 @@ void GameController::getControlKeys(Tank & player,
     case 80://down
       if (player.tankDirection == UP) {
         if (player.isCollisionCausedForward(wallVect, tankVect) == false) {
-          player.getRect().Y += 2;
-          player.getMask().Y += 2;
-          player.getCannon().Y += 2;
+          player.getRect().Y += 1;
+          player.getMask().Y += 1;
+          player.getCannon().Y += 1;
         }
       }
       if (player.tankDirection == DOWN) {
         if (player.isCollisionCausedBackward(wallVect, tankVect) == false) {
-          player.getRect().Y -= 2;
-          player.getMask().Y -= 2;
-          player.getCannon().Y -= 2;
+          player.getRect().Y -= 1;
+          player.getMask().Y -= 1;
+          player.getCannon().Y -= 1;
         }
       }
       if (player.tankDirection == RIGHT) {
         if (player.isCollisionCausedLeft(wallVect, tankVect) == false) {
-          player.getRect().X -= 2;
-          player.getMask().X -= 2;
-          player.getCannon().X -= 2;
+          player.getRect().X -= 1;
+          player.getMask().X -= 1;
+          player.getCannon().X -= 1;
         }
       }
       if (player.tankDirection == LEFT) {
         if (player.isCollisionCausedRight(wallVect, tankVect) == false) {
-          player.getRect().X += 2;
-          player.getMask().X += 2;
-          player.getCannon().X += 2;
+          player.getRect().X += 1;
+          player.getMask().X += 1;
+          player.getCannon().X += 1;
         }
       }
       break;
