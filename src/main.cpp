@@ -10,7 +10,6 @@ int main() {
   system("mode con lines=50 cols=75");
   GraphicsController graphicController;
   GameController gameController;
-  Player player;
 
   Generator* ptr = new Generator(new WallsGeneration);
   ptr->generateGameObjects(10, gameController.wallVect,
@@ -22,7 +21,7 @@ int main() {
   delete ptr;
   
   std::thread controls_thread(GameController::getControlKeys, 
-                                  std::ref(player), 
+                                  std::ref(Player::getInstance()), 
                                   std::ref(gameController.wallVect), 
                                   std::ref(gameController.tankVect),
                                   std::ref(gameController.missileVect));
@@ -40,7 +39,7 @@ int main() {
                                 gameController.wallVect,
                                 gameController.tankVect,
                                 gameController.missileVect,
-                                player);
+                                Player::getInstance());
 
     Sleep(16);
   }

@@ -19,7 +19,6 @@ public:
 private:
 
   ULONG_PTR m_gdiplusToken;
-  RECT rect;
   const Gdiplus::SolidBrush* blackBrush;
   const Gdiplus::SolidBrush* whiteBrush;
   const Gdiplus::SolidBrush* transpBrush;

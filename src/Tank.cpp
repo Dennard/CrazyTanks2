@@ -1,13 +1,14 @@
 #include "Tank.h"
 #include "Wall.h"
+#include "GameConstants.h"
 
 Tank::Tank()
 {
   tankDirection = DOWN;
-  getMask().Height = 60;
-  getRect().Height = 30;
-  getMask().Width = 60;
-  getRect().Width = 30;
+  getMask().Height = GameConstants::getInstance().getTankSize() * 2;
+  getRect().Height = GameConstants::getInstance().getTankSize();
+  getMask().Width = GameConstants::getInstance().getTankSize() * 2;
+  getRect().Width = GameConstants::getInstance().getTankSize();
 }
 
 Tank::~Tank()
@@ -92,29 +93,29 @@ void Tank::turnLeft()
   case UP: 
       getCannon().X = getRect().X;
       getCannon().Y = getRect().Y + 10;
-      getCannon().Height = getRect().Height - 10;
-      getCannon().Width = getRect().Width - 20;
+      getCannon().Height = getRect().Height - 20;
+      getCannon().Width = getRect().Width - 10;
       tankDirection = LEFT;
       break;
   case LEFT:
       getCannon().X = getRect().X + 10;
-      getCannon().Y = getRect().Y;
-      getCannon().Height = getRect().Height - 20;
-      getCannon().Width = getRect().Width - 10;
-      tankDirection = DOWN;
-      break;
-  case DOWN:
-      getCannon().X = getRect().X;
       getCannon().Y = getRect().Y + 10;
       getCannon().Height = getRect().Height - 10;
       getCannon().Width = getRect().Width - 20;
-      tankDirection = RIGHT;
+      tankDirection = DOWN;
       break;
-  case RIGHT:
+  case DOWN:
       getCannon().X = getRect().X + 10;
       getCannon().Y = getRect().Y + 10;
       getCannon().Height = getRect().Height - 20;
       getCannon().Width = getRect().Width - 10;
+      tankDirection = RIGHT;
+      break;
+  case RIGHT:
+      getCannon().X = getRect().X + 10;
+      getCannon().Y = getRect().Y;
+      getCannon().Height = getRect().Height - 10;
+      getCannon().Width = getRect().Width - 20;
       tankDirection = UP;
       break;
   default:
@@ -126,31 +127,31 @@ void Tank::turnRight()
 {
   switch (tankDirection) {
   case UP:
-      getCannon().X = getRect().X;
+      getCannon().X = getRect().X + 10;
       getCannon().Y = getRect().Y + 10;
-      getCannon().Height = getRect().Height - 10;
-      getCannon().Width = getRect().Width - 20;
+      getCannon().Height = getRect().Height - 20;
+      getCannon().Width = getRect().Width - 10;
       tankDirection = RIGHT;
       break;
   case LEFT:
       getCannon().X = getRect().X + 10;
-      getCannon().Y = getRect().Y + 10;
-      getCannon().Height = getRect().Height - 20;
-      getCannon().Width = getRect().Width - 10;
+      getCannon().Y = getRect().Y;
+      getCannon().Height = getRect().Height - 10;
+      getCannon().Width = getRect().Width - 20;
       tankDirection = UP;
       break;
   case DOWN:
-      getCannon().X = getRect().X + 10;
+      getCannon().X = getRect().X;
       getCannon().Y = getRect().Y + 10;
-      getCannon().Height = getRect().Height - 10;
-      getCannon().Width = getRect().Width - 20;
+      getCannon().Height = getRect().Height - 20;
+      getCannon().Width = getRect().Width - 10;
       tankDirection = LEFT;
       break;
   case RIGHT:
-      getCannon().X = getRect().X - 10;
-      getCannon().Y = getRect().Y;
-      getCannon().Height = getRect().Height - 20;
-      getCannon().Width = getRect().Width - 10;
+      getCannon().X = getRect().X + 10;
+      getCannon().Y = getRect().Y+10;
+      getCannon().Height = getRect().Height - 10;
+      getCannon().Width = getRect().Width - 20;
       tankDirection = DOWN;
       break;
   }

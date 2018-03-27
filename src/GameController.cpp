@@ -39,8 +39,8 @@ void GameController::checkMissilesCollision()
       int count = missileVect.size();
       if (missileVect.size() > 0) {
         if (missileVect[i]->getRect().Y <= 20 ||
-          missileVect[i]->getRect().Y >= 555 ||
-          missileVect[i]->getRect().X >= 555 ||
+          missileVect[i]->getRect().Y >= 570 ||
+          missileVect[i]->getRect().X >= 570 ||
           missileVect[i]->getRect().X <= 20) {
           missileVect.erase(missileVect.begin() + i);
           break;

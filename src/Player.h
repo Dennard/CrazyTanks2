@@ -5,14 +5,19 @@
 
 class Player :public Tank {
 public:
-  Player();
-  ~Player();
+
+  static Player& getInstance();
 
   int getHitPoints() const;
 
 private:
-  const int X_POS = 300;
-  const int Y_POS = 520;
+  Player();
+  Player(const Player&);
+  ~Player();
+  Player& operator=(const Player&);
+
+  static Player* p_instance;
+
   int hitPoints;
 };
 

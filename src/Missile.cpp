@@ -9,6 +9,7 @@ Missile::Missile(Tank& tank, std::vector<std::shared_ptr<Missile>>& missVect)
 {
   getRect().Height = 10;
   getRect().Width = 10;
+
   switch (tank.tankDirection) {
   case UP:
     getRect().X = tank.getRect().X + 10;
@@ -45,16 +46,16 @@ void Missile::move()
 {
   switch (missDirection) {
   case UP:
-    getRect().Y -= 5;
+    getRect().Y -= 3;
     break;
   case DOWN:
-    getRect().Y += 5;
+    getRect().Y += 3;
     break;
   case LEFT:
-    getRect().X -= 5;
+    getRect().X -= 3;
     break;
   case RIGHT:
-    getRect().X += 5;
+    getRect().X += 3;
     break;
   }
 }
