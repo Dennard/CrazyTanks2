@@ -11,9 +11,9 @@ Player::Player()
   getMask().Width = GameConstants::getTankSize() * 2;
   getRect().Width = GameConstants::getTankSize();
 
-  getMask().X = GameConstants::getPlayerStartingPosX() + 15;
+  getMask().X = GameConstants::getPlayerStartingPosX() - 15;
   getRect().X = GameConstants::getPlayerStartingPosX();
-  getMask().Y = GameConstants::getPlayerStartingPosY() + 15;
+  getMask().Y = GameConstants::getPlayerStartingPosY() - 15;
   getRect().Y = GameConstants::getPlayerStartingPosY();
 
   getCannon().X = getRect().X + 10;

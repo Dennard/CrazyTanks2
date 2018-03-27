@@ -24,14 +24,14 @@ void Tank::moveBackward(std::vector<std::shared_ptr<Wall>> wallVect,
                         std::vector<std::shared_ptr<Tank>> tankVect)
 {
   if (tankDirection == UP) {
-    if (isCollisionCausedForward(wallVect, tankVect) == false) {
+    if (isCollisionCausedBackward(wallVect, tankVect) == false) {
       getRect().Y += 1;
       getMask().Y += 1;
       getCannon().Y += 1;
     }
   }
   if (tankDirection == DOWN) {
-    if (isCollisionCausedBackward(wallVect, tankVect) == false) {
+    if (isCollisionCausedForward(wallVect, tankVect) == false) {
       getRect().Y -= 1;
       getMask().Y -= 1;
       getCannon().Y -= 1;
@@ -171,10 +171,10 @@ bool Tank::isCollisionCausedForward(std::vector<std::shared_ptr<Wall>> wallVect,
     if (forwardRect.IntersectsWith(tankVect[i]->getRect()) == true)
       return true;
   }
-  if (forwardRect.Y <= 20 ||
-    forwardRect.Y >= 555 ||
-    forwardRect.X >= 555 ||
-    forwardRect.X <= 20)
+  if (forwardRect.IntersectsWith(GameConstants::getDownBorderRect())||
+      forwardRect.IntersectsWith(GameConstants::getLeftBorderRect())||
+      forwardRect.IntersectsWith(GameConstants::getRightBorderRect())||
+      forwardRect.IntersectsWith(GameConstants::getUpperBorderRect()))
     return true;
   return false;
 }
@@ -194,10 +194,10 @@ bool Tank::isCollisionCausedBackward(std::vector<std::shared_ptr<Wall>> wallVect
     if (forwardRect.IntersectsWith(tankVect[i]->getRect()) == true)
       return true;
   }
-  if (forwardRect.Y <= 20 ||
-    forwardRect.Y >= 555 ||
-    forwardRect.X >= 555 ||
-    forwardRect.X <= 20)
+  if (forwardRect.IntersectsWith(GameConstants::getDownBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getLeftBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getRightBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getUpperBorderRect()))
     return true;
   return false;
 }
@@ -217,10 +217,10 @@ bool Tank::isCollisionCausedLeft(std::vector<std::shared_ptr<Wall>> wallVect,
     if (forwardRect.IntersectsWith(tankVect[i]->getRect()) == true)
       return true;
   }
-  if (forwardRect.Y <= 20 ||
-    forwardRect.Y >= 555 ||
-    forwardRect.X >= 555 ||
-    forwardRect.X <= 20)
+  if (forwardRect.IntersectsWith(GameConstants::getDownBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getLeftBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getRightBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getUpperBorderRect()))
     return true;
   return false;
 }
@@ -240,10 +240,10 @@ bool Tank::isCollisionCausedRight(std::vector<std::shared_ptr<Wall>> wallVect,
     if (forwardRect.IntersectsWith(tankVect[i]->getRect()) == true)
       return true;
   }
-  if (forwardRect.Y <= 20 ||
-    forwardRect.Y >= 555 ||
-    forwardRect.X >= 555 ||
-    forwardRect.X <= 20)
+  if (forwardRect.IntersectsWith(GameConstants::getDownBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getLeftBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getRightBorderRect()) ||
+    forwardRect.IntersectsWith(GameConstants::getUpperBorderRect()))
     return true;
   return false;
 }
