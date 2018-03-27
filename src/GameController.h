@@ -9,6 +9,8 @@
 class GameController {
 public:
 
+  static GameController& getInstance();
+
   std::vector<std::shared_ptr<Wall>> wallVect;
   std::vector<std::shared_ptr<Tank>> tankVect;
   std::vector<std::shared_ptr<Missile>> missileVect;
@@ -21,6 +23,13 @@ public:
   void checkMissilesCollision();
 
 private:
+
+  static GameController * p_instance;
+
+  GameController();
+  GameController(const GameController&);
+  GameController& operator=(GameController&);
+  ~GameController();
 
 };
 

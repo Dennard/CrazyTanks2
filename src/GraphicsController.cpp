@@ -7,26 +7,10 @@ GraphicsController::GraphicsController()
   hwnd = GetConsoleWindow();
   hdc = GetDC(hwnd);
   mem_DC = CreateCompatibleDC(hdc);
-  blackBrush = new Gdiplus::SolidBrush(Gdiplus::Color(0, 0, 0));
-  whiteBrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 255, 255));
-  transpBrush = new Gdiplus::SolidBrush(Gdiplus::Color(100, 0, 0, 0));
-  redBrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 0, 0));
-  blueBrush = new Gdiplus::SolidBrush(Gdiplus::Color(0, 0, 255));
-  upperBound = new Gdiplus::Rect(0,0,600,20);
-  downBound = new Gdiplus::Rect(0, 580, 600, 20);
-  leftBound = new Gdiplus::Rect(0, 20, 20, 560);
-  rightBound = new Gdiplus::Rect(580, 20, 20, 560);
-  mainField = new Gdiplus::Rect(0, 0, 600, 600);
-  statField = new Gdiplus::Rect(0, 601, 600, 100);
 }
 
 GraphicsController::~GraphicsController()
 {
-  delete blackBrush;
-  delete transpBrush;
-  delete whiteBrush;
-  delete redBrush;
-  delete blueBrush;
   Gdiplus::GdiplusShutdown(m_gdiplusToken);
 }
 
@@ -39,23 +23,40 @@ void GraphicsController::DrawFrame(
   Gdiplus::Graphics main(hdc);
   Gdiplus::Bitmap buffer(600, 700, &main);
   Gdiplus::Graphics buf(&buffer);
-  buf.FillRectangle(whiteBrush, *mainField);
-  buf.FillRectangle(transpBrush, *statField);
-  buf.FillRectangle(transpBrush, *upperBound);
-  buf.FillRectangle(transpBrush, *downBound);
-  buf.FillRectangle(transpBrush, *leftBound);
-  buf.FillRectangle(transpBrush, *rightBound);
+
+  buf.FillRectangle(GameConstants::getWhiteBrush(), 
+                    GameConstants::getMainFieldRect());
+
+  buf.FillRectangle(GameConstants::getBlackBrush(), 
+                    GameConstants::getStatFieldRect());
+
+  buf.FillRectangle(GameConstants::getTranspBrush(),
+                    GameConstants::getDownBorderRect());
+
+  buf.FillRectangle(GameConstants::getTranspBrush(),
+                    GameConstants::getUpperBorderRect());
+
+  buf.FillRectangle(GameConstants::getTranspBrush(),
+                    GameConstants::getLeftBorderRect());
+
+  buf.FillRectangle(GameConstants::getTranspBrush(),
+                    GameConstants::getRightBorderRect());
+
   for (int i = 0; i < wallvect.size(); i++) {
-    buf.FillRectangle(blackBrush, wallvect[i]->getRect());
+    buf.FillRectangle(GameConstants::getBlackBrush(), wallvect[i]->getRect());
   }
   for (int i = 0; i < tankvect.size(); i++) {
-    buf.FillRectangle(redBrush, tankvect[i]->getRect());
-    buf.FillRectangle(blackBrush, tankvect[i]->getCannon());
+    buf.FillRectangle(GameConstants::getRedBrush(), tankvect[i]->getRect());
+    buf.FillRectangle(GameConstants::getBlackBrush(), tankvect[i]->getCannon());
   }
   for (int i = 0; i < missvect.size(); i++) {
-    buf.FillRectangle(blackBrush, missvect[i]->getRect());
+    buf.FillRectangle(GameConstants::getBlackBrush(), missvect[i]->getRect());
   }  
-  buf.FillRectangle(blueBrush, player.getRect());
-  buf.FillRectangle(blackBrush, player.getCannon());
-  main.DrawImage(&buffer, 0, 0, 0, 0, 600, 700,Gdiplus::UnitPixel);
+
+  buf.FillRectangle(GameConstants::getBlueBrush(), player.getRect());
+  buf.FillRectangle(GameConstants::getBlackBrush(), player.getCannon());
+  main.DrawImage(&buffer, 0, 0, 0, 0, 
+                 GameConstants::getMainFieldRect().Width, 
+                 GameConstants::getMainFieldRect().Height,
+                 Gdiplus::UnitPixel);
 }

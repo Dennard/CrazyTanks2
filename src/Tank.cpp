@@ -1,14 +1,13 @@
 #include "Tank.h"
-#include "Wall.h"
-#include "GameConstants.h"
+
 
 Tank::Tank()
 {
   tankDirection = DOWN;
-  getMask().Height = GameConstants::getInstance().getTankSize() * 2;
-  getRect().Height = GameConstants::getInstance().getTankSize();
-  getMask().Width = GameConstants::getInstance().getTankSize() * 2;
-  getRect().Width = GameConstants::getInstance().getTankSize();
+  getMask().Height = GameConstants::getTankSize() * 2;
+  getRect().Height = GameConstants::getTankSize();
+  getMask().Width = GameConstants::getTankSize() * 2;
+  getRect().Width = GameConstants::getTankSize();
 }
 
 Tank::~Tank()

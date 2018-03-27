@@ -4,26 +4,35 @@
 #include <ObjIdl.h>
 #include <gdiplus.h>
 
-  class GameConstants {
-  public:
+class GameConstants {
+public:
 
-    static GameConstants & getInstance();
+  static const Gdiplus::Rect getMainFieldRect();
+  static const Gdiplus::Rect getStatFieldRect();
 
-    const Gdiplus::Rect getMainFieldSize();
-    const Gdiplus::Rect getStatFieldSize();
+  static const Gdiplus::Rect getDownBorderRect();
+  static const Gdiplus::Rect getUpperBorderRect();
+  static const Gdiplus::Rect getLeftBorderRect();
+  static const Gdiplus::Rect getRightBorderRect();
 
-    const int getTankSize();
+  static Gdiplus::SolidBrush* getWhiteBrush();
+  static Gdiplus::SolidBrush* getBlackBrush();
+  static Gdiplus::SolidBrush* getRedBrush();
+  static Gdiplus::SolidBrush* getBlueBrush();
+  static Gdiplus::SolidBrush* getTranspBrush();
 
-    const int getPlayerStartingPosX();
-    const int getPlayerStartingPosY();
+  static const int getTankSize();
 
-  private:
+  static const int getPlayerStartingPosX();
+  static const int getPlayerStartingPosY();
 
-    GameConstants();
-    GameConstants(const GameConstants&);
-    //GameConstants& operator=(const GameConstants&);
+private:
 
-    static GameConstants* p_instance;
-  };
+  GameConstants();
+  GameConstants(const GameConstants&);
+  GameConstants& operator=(const GameConstants&);
+  ~GameConstants();
+
+};
 
 #endif

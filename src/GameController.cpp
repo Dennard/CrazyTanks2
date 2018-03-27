@@ -1,7 +1,16 @@
 #include "GameController.h"
 #include <conio.h>
 
-void GameController::getControlKeys(Player& player, 
+GameController* GameController::p_instance = nullptr;
+
+GameController & GameController::getInstance()
+{
+  if (!p_instance)
+    p_instance = new GameController();
+  return *p_instance;
+}
+
+void GameController::getControlKeys(Player& player,
                                     std::vector<std::shared_ptr<Wall>>& wallVect,
                                     std::vector<std::shared_ptr<Tank>>& tankVect,
                                     std::vector<std::shared_ptr<Missile>>& missVect)
@@ -66,4 +75,19 @@ void GameController::checkMissilesCollision()
       }
     }
   }
+}
+
+GameController::GameController()
+{
+
+}
+
+GameController::GameController(const GameController &)
+{
+
+}
+
+GameController::~GameController()
+{
+
 }

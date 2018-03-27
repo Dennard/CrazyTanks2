@@ -1,7 +1,6 @@
 #include <memory>
 #include <thread>
 
-#include "GameController.h"
 #include "GraphicsController.h"
 #include "WallsGeneration.h"
 #include "TanksGeneration.h"
@@ -9,36 +8,35 @@
 int main() {
   system("mode con lines=50 cols=75");
   GraphicsController graphicController;
-  GameController gameController;
 
   Generator* ptr = new Generator(new WallsGeneration);
-  ptr->generateGameObjects(10, gameController.wallVect,
-                               gameController.tankVect);
+  ptr->generateGameObjects(10, GameController::getInstance().wallVect,
+                               GameController::getInstance().tankVect);
   delete ptr;
   ptr = new Generator(new TanksGeneration);
-  ptr->generateGameObjects(5, gameController.wallVect,
-                              gameController.tankVect);
+  ptr->generateGameObjects(5, GameController::getInstance().wallVect,
+                              GameController::getInstance().tankVect);
   delete ptr;
   
   std::thread controls_thread(GameController::getControlKeys, 
                                   std::ref(Player::getInstance()), 
-                                  std::ref(gameController.wallVect), 
-                                  std::ref(gameController.tankVect),
-                                  std::ref(gameController.missileVect));
+                                  std::ref(GameController::getInstance().wallVect),
+                                  std::ref(GameController::getInstance().tankVect),
+                                  std::ref(GameController::getInstance().missileVect));
   controls_thread.detach();
 
   while (true) {
 
-    for (int i = 0; i < gameController.missileVect.size(); i++) {
-      gameController.missileVect[i]->move();
+    for (int i = 0; i < GameController::getInstance().missileVect.size(); i++) {
+      GameController::getInstance().missileVect[i]->move();
     }
 
-    gameController.checkMissilesCollision();
+    GameController::getInstance().checkMissilesCollision();
 
     graphicController.DrawFrame( 
-                                gameController.wallVect,
-                                gameController.tankVect,
-                                gameController.missileVect,
+                                GameController::getInstance().wallVect,
+                                GameController::getInstance().tankVect,
+                                GameController::getInstance().missileVect,
                                 Player::getInstance());
 
     Sleep(16);

@@ -19,17 +19,6 @@ public:
 private:
 
   ULONG_PTR m_gdiplusToken;
-  const Gdiplus::SolidBrush* blackBrush;
-  const Gdiplus::SolidBrush* whiteBrush;
-  const Gdiplus::SolidBrush* transpBrush;
-  const Gdiplus::SolidBrush* redBrush;
-  const Gdiplus::SolidBrush* blueBrush;
-  const Gdiplus::Rect* upperBound;
-  const Gdiplus::Rect* downBound;
-  const Gdiplus::Rect* leftBound;
-  const Gdiplus::Rect* rightBound;
-  const Gdiplus::Rect* mainField;
-  const Gdiplus::Rect* statField;
 };
 
 #endif

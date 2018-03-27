@@ -2,6 +2,7 @@
 #define TANK_H
 
 #include "Wall.h"
+#include "GameConstants.h"
 
 enum Directions {
   UP,

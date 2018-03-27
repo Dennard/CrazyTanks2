@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "GameConstants.h"
 
 Player* Player::p_instance = nullptr;
 
@@ -7,15 +6,15 @@ Player::Player()
 {
   tankDirection = UP;
 
-  getMask().Height = GameConstants::getInstance().getTankSize() * 2;
-  getRect().Height = GameConstants::getInstance().getTankSize();
-  getMask().Width = GameConstants::getInstance().getTankSize() * 2;
-  getRect().Width = GameConstants::getInstance().getTankSize();
+  getMask().Height = GameConstants::getTankSize() * 2;
+  getRect().Height = GameConstants::getTankSize();
+  getMask().Width = GameConstants::getTankSize() * 2;
+  getRect().Width = GameConstants::getTankSize();
 
-  getMask().X = GameConstants::getInstance().getPlayerStartingPosX() + 15;
-  getRect().X = GameConstants::getInstance().getPlayerStartingPosX();
-  getMask().Y = GameConstants::getInstance().getPlayerStartingPosY() + 15;
-  getRect().Y = GameConstants::getInstance().getPlayerStartingPosY();
+  getMask().X = GameConstants::getPlayerStartingPosX() + 15;
+  getRect().X = GameConstants::getPlayerStartingPosX();
+  getMask().Y = GameConstants::getPlayerStartingPosY() + 15;
+  getRect().Y = GameConstants::getPlayerStartingPosY();
 
   getCannon().X = getRect().X + 10;
   getCannon().Y = getRect().Y;
