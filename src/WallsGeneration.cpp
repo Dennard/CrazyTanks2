@@ -9,21 +9,23 @@ WallsGeneration::~WallsGeneration()
 }
 
 void WallsGeneration::generateGameObjects(int count,
-                                         std::vector<GameObject>& objVect,
-                                         std::vector<GameObject>& tankVect)
+                                         std::vector<std::shared_ptr<Wall>>& wallVect,
+                                         std::vector<std::shared_ptr<Tank>>& tankVect)
 {
   bool flag = false;
   for (int i = 0; i < count; i++) {
-    objVect.push_back(GameObject::createGameObject(WALL));
-    randomizeWall(objVect[i]);
+    Wall wall;
+    auto wall_ptr = std::make_shared<Wall>(wall);
+    wallVect.push_back(wall_ptr);
+    randomizeWall(*wallVect[i]);
     if (i >= 1) {
       flag = false;
       while (flag == false) {
         flag = true;
         for (int j = 0; j <= i - 1; j++) {
-          if (objVect[i].getMask().IntersectsWith(objVect[j].getMask())) {
+          if (wallVect[i]->getMask().IntersectsWith(wallVect[j]->getMask())) {
             flag = false;
-            randomizeWall(objVect[i]);
+            randomizeWall(*wallVect[i]);
             break;
           }
         }

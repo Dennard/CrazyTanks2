@@ -1,144 +1,33 @@
 #include "GameController.h"
 #include <conio.h>
-//#include "Wallsgenerating.h"
 
-void GameController::getControlKeys(Tank & player, 
-                                    std::vector<GameObject>& wallVect, 
-                                    std::vector<GameObject>& tankVect)
+void GameController::getControlKeys(Player& player, 
+                                    std::vector<std::shared_ptr<Wall>>& wallVect,
+                                    std::vector<std::shared_ptr<Tank>>& tankVect,
+                                    std::vector<std::shared_ptr<Missile>>& missVect)
 {
-  player.tankDirection = UP;
   char symbol = _getch();
   while ((symbol = _getch())) {
-    switch (symbol) {
-    case 72://up
-      if (player.tankDirection == UP) {
-        if (player.isCollisionCausedForward(wallVect, tankVect) == false) {
-          player.getRect().Y -= 1;
-          player.getMask().Y -= 1;
-          player.getCannon().Y -= 1;
-        }
-      }
-      if (player.tankDirection == DOWN) {
-        if (player.isCollisionCausedBackward(wallVect, tankVect) == false) {
-          player.getRect().Y += 1;
-          player.getMask().Y += 1;
-          player.getCannon().Y += 1;
-        }
-      }
-      if (player.tankDirection == RIGHT) {
-        if (player.isCollisionCausedRight(wallVect, tankVect) == false) {
-          player.getRect().X += 1;
-          player.getMask().X += 1;
-          player.getCannon().X += 1;
-        }
-      }
-      if (player.tankDirection == LEFT) {
-        if (player.isCollisionCausedLeft(wallVect, tankVect) == false) {
-          player.getRect().X -= 1;
-          player.getMask().X -= 1;
-          player.getCannon().X -= 1;
-        }
-      }
-      break;
-    case 75://left
-      if (player.tankDirection == UP) {
-        player.getCannon().X = player.getRect().X + 10;
-        player.getCannon().Y = player.getRect().Y + 10;
-        player.getCannon().Height = player.getRect().Height - 10;
-        player.getCannon().Width = player.getRect().Width - 20;
-        player.tankDirection = LEFT;
+  if (symbol == 32) {
+    Missile fire(player, missVect);
+  }
+  else {
+      switch (symbol) {
+      case 72://up
+        player.moveForward(wallVect, tankVect);
+        break;
+      case 75://left
+        player.turnLeft();
+        break;
+      case 77://right
+        player.turnRight();
+        break;
+      case 80://down
+        player.moveBackward(wallVect, tankVect);
+        break;
+      default:
         break;
       }
-      if (player.tankDirection == LEFT) {
-        player.getCannon().X = player.getRect().X + 10;
-        player.getCannon().Y = player.getRect().Y;
-        player.getCannon().Height = player.getRect().Height - 20;
-        player.getCannon().Width = player.getRect().Width - 10;
-        player.tankDirection = DOWN;
-        break;
-      }
-      if (player.tankDirection == DOWN) {
-        player.getCannon().X = player.getRect().X;
-        player.getCannon().Y = player.getRect().Y+10;
-        player.getCannon().Height = player.getRect().Height - 10;
-        player.getCannon().Width = player.getRect().Width - 20;
-        player.tankDirection = RIGHT;
-        break;
-      }
-      if (player.tankDirection == RIGHT) {
-        player.getCannon().X = player.getRect().X + 10;
-        player.getCannon().Y = player.getRect().Y + 10;
-        player.getCannon().Height = player.getRect().Height - 20;
-        player.getCannon().Width = player.getRect().Width - 10;
-        player.tankDirection = UP;
-        break;
-      }
-
-    case 77://right
-      if (player.tankDirection == UP) {
-        player.getCannon().X = player.getRect().X;
-        player.getCannon().Y = player.getRect().Y+10;
-        player.getCannon().Height = player.getRect().Height-10;
-        player.getCannon().Width = player.getRect().Width-20;
-        player.tankDirection = RIGHT;
-        break;
-      }
-      if (player.tankDirection == LEFT) {
-        player.getCannon().X = player.getRect().X+10;
-        player.getCannon().Y = player.getRect().Y+10;
-        player.getCannon().Height = player.getRect().Height-20;
-        player.getCannon().Width = player.getRect().Width-10;
-        player.tankDirection = UP;
-        break;
-      }
-      if (player.tankDirection == DOWN) {
-        player.getCannon().X = player.getRect().X+10;
-        player.getCannon().Y = player.getRect().Y+10;
-        player.getCannon().Height = player.getRect().Height-10;
-        player.getCannon().Width = player.getRect().Width-20;
-        player.tankDirection = LEFT;
-        break;
-      }
-      if (player.tankDirection == RIGHT) {
-        player.getCannon().X = player.getRect().X - 10;
-        player.getCannon().Y = player.getRect().Y;
-        player.getCannon().Height = player.getRect().Height - 20;
-        player.getCannon().Width = player.getRect().Width - 10;
-        player.tankDirection = DOWN;
-        break;
-      }
-    case 80://down
-      if (player.tankDirection == UP) {
-        if (player.isCollisionCausedForward(wallVect, tankVect) == false) {
-          player.getRect().Y += 1;
-          player.getMask().Y += 1;
-          player.getCannon().Y += 1;
-        }
-      }
-      if (player.tankDirection == DOWN) {
-        if (player.isCollisionCausedBackward(wallVect, tankVect) == false) {
-          player.getRect().Y -= 1;
-          player.getMask().Y -= 1;
-          player.getCannon().Y -= 1;
-        }
-      }
-      if (player.tankDirection == RIGHT) {
-        if (player.isCollisionCausedLeft(wallVect, tankVect) == false) {
-          player.getRect().X -= 1;
-          player.getMask().X -= 1;
-          player.getCannon().X -= 1;
-        }
-      }
-      if (player.tankDirection == LEFT) {
-        if (player.isCollisionCausedRight(wallVect, tankVect) == false) {
-          player.getRect().X += 1;
-          player.getMask().X += 1;
-          player.getCannon().X += 1;
-        }
-      }
-      break;
-    default:
-      break;
     }
   }
 }

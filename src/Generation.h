@@ -1,14 +1,15 @@
 #ifndef GENERATION_H
 #define GENERATION_H
 
-#include "GameObject.h"
 #include <random>
+#include "Wall.h"
+#include "Tank.h"
 
 class Generation {
 public:
   virtual void generateGameObjects(int count,
-                                  std::vector<GameObject>& objVect, 
-                                  std::vector<GameObject>& tankVect) = 0;
+                                  std::vector<std::shared_ptr<Wall>>& wallVect,
+                                  std::vector<std::shared_ptr<Tank>>& tankVect) = 0;
 };
 
 #endif

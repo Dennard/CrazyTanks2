@@ -2,17 +2,23 @@
 
 Player::Player()
 {
-  getMask().Height = TANK_SIZE;
-  getRect().Height = TANK_SIZE / 2;
-  getMask().Width = TANK_SIZE;
-  getRect().Width = TANK_SIZE / 2;
+  tankDirection = UP;
+  getMask().Height = 60;
+  getRect().Height = 30;
+  getMask().Width = 60;
+  getRect().Width = 30;
   getMask().X = X_POS;
-  getRect().X = X_POS - TANK_SIZE / 2;
+  getRect().X = X_POS - 15;
   getMask().Y = Y_POS;
-  getRect().Y = Y_POS - TANK_SIZE / 2;
+  getRect().Y = Y_POS - 15;
 }
 
 Player::~Player()
 {
 
+}
+
+int Player::getHitPoints() const
+{
+  return hitPoints;
 }

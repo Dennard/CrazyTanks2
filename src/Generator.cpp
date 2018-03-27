@@ -5,8 +5,8 @@ Generator::~Generator()
 }
 
 void Generator::generateGameObjects(int count, 
-                                  std::vector<GameObject>& objVect, 
-                                  std::vector<GameObject>& tankVect)
+                                  std::vector<std::shared_ptr<Wall>>& objVect,
+                                  std::vector<std::shared_ptr<Tank>>& tankVect)
 {
   p->generateGameObjects(count, objVect,tankVect);
 }

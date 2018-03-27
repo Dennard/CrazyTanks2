@@ -11,9 +11,11 @@ public:
   GraphicsController();
   ~GraphicsController();
   void DrawFrame( 
-                std::vector<GameObject>& wallvect,
-                std::vector<GameObject>& tankvect,
+                std::vector<std::shared_ptr<Wall>>& wallvect,
+                std::vector<std::shared_ptr<Tank>>& tankvect,
+                std::vector<std::shared_ptr<Missile>>& missvect,
                 Player& player);
+
 private:
 
   ULONG_PTR m_gdiplusToken;

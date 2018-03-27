@@ -5,11 +5,14 @@
 
 class Generator {
 public:
+
   Generator(Generation* gen) : p(gen) {}
   ~Generator();
+
   void generateGameObjects(int count,
-                        std::vector<GameObject>& objVect,
-                        std::vector<GameObject>& tankVect);
+                        std::vector<std::shared_ptr<Wall>>& wallVect,
+                        std::vector<std::shared_ptr<Tank>>& tankVect);
+
 private:
   Generation * p;
 };

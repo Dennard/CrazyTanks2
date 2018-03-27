@@ -1,7 +1,7 @@
 #ifndef TANK_H
 #define TANK_H
 
-#include "GameObject.h"
+#include "Wall.h"
 
 enum Directions {
   UP,
@@ -14,23 +14,33 @@ class Tank : public GameObject {
 public:
   Tank();
   ~Tank();
+
   Directions tankDirection;
+
   Gdiplus::Rect& getCannon();
-  void moveBackward();
-  void moveForward();
+
+  void moveBackward(std::vector<std::shared_ptr<Wall>> wallVect,
+                    std::vector<std::shared_ptr<Tank>> tankVect);
+
+  void moveForward(std::vector<std::shared_ptr<Wall>> wallVect,
+                   std::vector<std::shared_ptr<Tank>> tankVect);
   void turnLeft();
   void turnRight();
-  bool isCollisionCausedForward(std::vector<GameObject>& wallVect, 
-                                std::vector<GameObject>& tankVect);
-  bool isCollisionCausedBackward(std::vector<GameObject>& wallVect,
-                                 std::vector<GameObject>& tankVect);
-  bool isCollisionCausedLeft(std::vector<GameObject>& wallVect,
-                             std::vector<GameObject>& tankVect);
-  bool isCollisionCausedRight(std::vector<GameObject>& wallVect,
-                              std::vector<GameObject>& tankVect);
+
+  bool isCollisionCausedForward(std::vector<std::shared_ptr<Wall>> wallVect,
+                                std::vector<std::shared_ptr<Tank>> tankVect);
+
+  bool isCollisionCausedBackward(std::vector<std::shared_ptr<Wall>> wallVect,
+                                 std::vector<std::shared_ptr<Tank>> tankVect);
+
+  bool isCollisionCausedLeft(std::vector<std::shared_ptr<Wall>> wallVect,
+                             std::vector<std::shared_ptr<Tank>> tankVect);
+
+  bool isCollisionCausedRight(std::vector<std::shared_ptr<Wall>> wallVect,
+                              std::vector<std::shared_ptr<Tank>> tankVect);
+
 protected:
   Gdiplus::Rect cannonRect;
-  const int TANK_SIZE = 60;
 private:
   
 };

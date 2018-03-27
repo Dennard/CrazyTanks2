@@ -31,8 +31,9 @@ GraphicsController::~GraphicsController()
 }
 
 void GraphicsController::DrawFrame(
-                                 std::vector<GameObject>& wallvect,
-                                 std::vector<GameObject>& tankvect,
+                                 std::vector<std::shared_ptr<Wall>>& wallvect,
+                                 std::vector<std::shared_ptr<Tank>>& tankvect,
+                                 std::vector<std::shared_ptr<Missile>>& missvect,
                                  Player& player)
 {
   Gdiplus::Graphics main(hdc);
@@ -45,11 +46,13 @@ void GraphicsController::DrawFrame(
   buf.FillRectangle(transpBrush, *leftBound);
   buf.FillRectangle(transpBrush, *rightBound);
   for (int i = 0; i < wallvect.size(); i++) {
-    buf.FillRectangle(blackBrush, wallvect[i].getRect());
+    buf.FillRectangle(blackBrush, wallvect[i]->getRect());
   }
   for (int i = 0; i < tankvect.size(); i++) {
-    buf.FillRectangle(redBrush, tankvect[i].getRect());
- //   graphics.FillRectangle(redBrush, tankvect[i].getC());
+    buf.FillRectangle(redBrush, tankvect[i]->getRect());
+  }
+  for (int i = 0; i < missvect.size(); i++) {
+    buf.FillRectangle(blackBrush, missvect[i]->getRect());
   }
   buf.FillRectangle(transpBrush, player.getCannon());
   buf.FillRectangle(blueBrush, player.getRect());
