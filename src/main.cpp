@@ -13,7 +13,7 @@ int main() {
   Player player;
 
   Generator* ptr = new Generator(new WallsGeneration);
-  ptr->generateGameObjects(5, gameController.wallVect,
+  ptr->generateGameObjects(10, gameController.wallVect,
                                gameController.tankVect);
   delete ptr;
   ptr = new Generator(new TanksGeneration);
@@ -21,22 +21,27 @@ int main() {
                               gameController.tankVect);
   delete ptr;
   
-  std::thread first_thread(GameController::getControlKeys, 
+  std::thread controls_thread(GameController::getControlKeys, 
                                   std::ref(player), 
                                   std::ref(gameController.wallVect), 
                                   std::ref(gameController.tankVect),
                                   std::ref(gameController.missileVect));
-  first_thread.detach();
+  controls_thread.detach();
 
   while (true) {
+
+    for (int i = 0; i < gameController.missileVect.size(); i++) {
+      gameController.missileVect[i]->move();
+    }
+
+    gameController.checkMissilesCollision();
+
     graphicController.DrawFrame( 
                                 gameController.wallVect,
                                 gameController.tankVect,
                                 gameController.missileVect,
                                 player);
-    for (int i = 0; i < gameController.missileVect.size(); i++) {
-      gameController.missileVect[i]->move();
-    }
+
     Sleep(16);
   }
   return 0;

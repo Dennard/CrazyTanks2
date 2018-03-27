@@ -31,3 +31,39 @@ void GameController::getControlKeys(Player& player,
     }
   }
 }
+
+void GameController::checkMissilesCollision()
+{
+  if (missileVect.size() > 0) {
+    for (int i = 0; i < missileVect.size(); i++) {
+      int count = missileVect.size();
+      if (missileVect.size() > 0) {
+        if (missileVect[i]->getRect().Y <= 20 ||
+          missileVect[i]->getRect().Y >= 555 ||
+          missileVect[i]->getRect().X >= 555 ||
+          missileVect[i]->getRect().X <= 20) {
+          missileVect.erase(missileVect.begin() + i);
+          break;
+        }
+      }
+      if (missileVect.size() > 0 && missileVect.size() >= count) {
+        for (int j = 0; j < wallVect.size(); j++) {
+          if (missileVect[i]->getRect().IntersectsWith(wallVect[j]->getRect())) {
+            wallVect.erase(wallVect.begin() + j);
+            missileVect.erase(missileVect.begin() + i);
+            break;
+          }
+        }
+      }
+      if (missileVect.size() > 0 && missileVect.size() >= count) {
+        for (int n = 0; n < tankVect.size(); n++) {
+          if (missileVect[i]->getRect().IntersectsWith(tankVect[n]->getRect())) {
+            tankVect.erase(tankVect.begin() + n);
+            missileVect.erase(missileVect.begin() + i);
+            break;
+          }
+        }
+      }
+    }
+  }
+}

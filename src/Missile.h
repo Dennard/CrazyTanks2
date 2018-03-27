@@ -12,7 +12,9 @@ public:
   void move();
 
 private:
+
   Directions missDirection;
+
 };
 
 #endif

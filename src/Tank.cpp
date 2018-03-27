@@ -90,7 +90,7 @@ void Tank::turnLeft()
 {
   switch (tankDirection) {
   case UP: 
-      getCannon().X = getRect().X + 10;
+      getCannon().X = getRect().X;
       getCannon().Y = getRect().Y + 10;
       getCannon().Height = getRect().Height - 10;
       getCannon().Width = getRect().Width - 20;

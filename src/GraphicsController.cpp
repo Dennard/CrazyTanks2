@@ -50,11 +50,12 @@ void GraphicsController::DrawFrame(
   }
   for (int i = 0; i < tankvect.size(); i++) {
     buf.FillRectangle(redBrush, tankvect[i]->getRect());
+    buf.FillRectangle(blackBrush, tankvect[i]->getCannon());
   }
   for (int i = 0; i < missvect.size(); i++) {
     buf.FillRectangle(blackBrush, missvect[i]->getRect());
-  }
-  buf.FillRectangle(transpBrush, player.getCannon());
+  }  
   buf.FillRectangle(blueBrush, player.getRect());
+  buf.FillRectangle(blackBrush, player.getCannon());
   main.DrawImage(&buffer, 0, 0, 0, 0, 600, 700,Gdiplus::UnitPixel);
 }

@@ -14,9 +14,11 @@ public:
   std::vector<std::shared_ptr<Missile>> missileVect;
 
   static void getControlKeys(Player& player, 
-                    std::vector<std::shared_ptr<Wall>>& wallVect,
-                    std::vector<std::shared_ptr<Tank>>& tankVect,
-                    std::vector<std::shared_ptr<Missile>>& missVect);
+                            std::vector<std::shared_ptr<Wall>>& wallVect,
+                            std::vector<std::shared_ptr<Tank>>& tankVect,
+                            std::vector<std::shared_ptr<Missile>>& missVect);
+
+  void checkMissilesCollision();
 
 private:
 
