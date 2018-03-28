@@ -25,30 +25,30 @@ void Tank::moveBackward(std::vector<std::shared_ptr<Wall>> wallVect,
 {
   if (tankDirection == UP) {
     if (isCollisionCausedBackward(wallVect, tankVect) == false) {
-      getRect().Y += 1;
-      getMask().Y += 1;
-      getCannon().Y += 1;
+      getRect().Y += 2;
+      getMask().Y += 2;
+      getCannon().Y += 2;
     }
   }
   if (tankDirection == DOWN) {
     if (isCollisionCausedForward(wallVect, tankVect) == false) {
-      getRect().Y -= 1;
-      getMask().Y -= 1;
-      getCannon().Y -= 1;
+      getRect().Y -= 2;
+      getMask().Y -= 2;
+      getCannon().Y -= 2;
     }
   }
   if (tankDirection == RIGHT) {
     if (isCollisionCausedLeft(wallVect, tankVect) == false) {
-      getRect().X -= 1;
-      getMask().X -= 1;
-      getCannon().X -= 1;
+      getRect().X -= 2;
+      getMask().X -= 2;
+      getCannon().X -= 2;
     }
   }
   if (tankDirection == LEFT) {
     if (isCollisionCausedRight(wallVect, tankVect) == false) {
-      getRect().X += 1;
-      getMask().X += 1;
-      getCannon().X += 1;
+      getRect().X += 2;
+      getMask().X += 2;
+      getCannon().X += 2;
     }
   }
 }
@@ -58,30 +58,30 @@ void Tank::moveForward(std::vector<std::shared_ptr<Wall>> wallVect,
 {
   if (tankDirection == UP) {
     if (isCollisionCausedForward(wallVect, tankVect) == false) {
-      getRect().Y -= 1;
-      getMask().Y -= 1;
-      getCannon().Y -= 1;
+      getRect().Y -= 2;
+      getMask().Y -= 2;
+      getCannon().Y -= 2;
     }
   }
   if (tankDirection == DOWN) {
     if (isCollisionCausedBackward(wallVect, tankVect) == false) {
-      getRect().Y += 1;
-      getMask().Y += 1;
-      getCannon().Y += 1;
+      getRect().Y += 2;
+      getMask().Y += 2;
+      getCannon().Y += 2;
     }
   }
   if (tankDirection == RIGHT) {
     if (isCollisionCausedRight(wallVect, tankVect) == false) {
-      getRect().X += 1;
-      getMask().X += 1;
-      getCannon().X += 1;
+      getRect().X += 2;
+      getMask().X += 2;
+      getCannon().X += 2;
     }
   }
   if (tankDirection == LEFT) {
     if (isCollisionCausedLeft(wallVect, tankVect) == false) {
-      getRect().X -= 1;
-      getMask().X -= 1;
-      getCannon().X -= 1;
+      getRect().X -= 2;
+      getMask().X -= 2;
+      getCannon().X -= 2;
     }
   }
 }

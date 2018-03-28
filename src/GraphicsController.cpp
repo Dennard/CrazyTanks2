@@ -1,4 +1,8 @@
 #include "GraphicsController.h"
+#include <string>
+#include <mutex>
+
+GraphicsController* GraphicsController::p_instance = nullptr;
 
 GraphicsController::GraphicsController()
 {
@@ -8,11 +12,19 @@ GraphicsController::GraphicsController()
   hdc = GetDC(hwnd);
   mem_DC = CreateCompatibleDC(hdc);
   system("mode con lines=50 cols=75");
+
 }
 
 GraphicsController::~GraphicsController()
 {
   Gdiplus::GdiplusShutdown(m_gdiplusToken);
+}
+
+GraphicsController & GraphicsController::getInstance()
+{
+  if (!p_instance)
+    p_instance = new GraphicsController();
+  return *p_instance;
 }
 
 void GraphicsController::DrawFrame(
@@ -56,8 +68,29 @@ void GraphicsController::DrawFrame(
 
   buf.FillRectangle(GameConstants::getBlueBrush(), player.getRect());
   buf.FillRectangle(GameConstants::getBlackBrush(), player.getCannon());
+
+  std::mutex stime;
+  stime.lock();
+
+  std::wstring time = L"TIME: " + std::to_wstring(minutes) + L":" + std::to_wstring(seconds);
+  const wchar_t* chr = time.c_str();
+
+  stime.unlock();
+  Gdiplus::PointF ptf(10, 610);
+  Gdiplus::FontFamily  fontFamily(L"Times New Roman");
+  Gdiplus::Font stdfont(&fontFamily, 28, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+  buf.DrawString(chr, -1, &stdfont,
+    GameConstants::getTimeStringPoint(),
+    GameConstants::getWhiteBrush());
+
   main.DrawImage(&buffer, 0, 0, 0, 0, 
                  GameConstants::getMainFieldRect().Width, 
                  GameConstants::getMainFieldRect().Height,
                  Gdiplus::UnitPixel);
 }
+
+void GraphicsController::drawStats(Gdiplus::Graphics & graph)
+{
+
+}
+

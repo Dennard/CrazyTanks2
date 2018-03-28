@@ -30,7 +30,7 @@ const Gdiplus::Rect GameConstants::getRightBorderRect()
   return Gdiplus::Rect(580, 20, 20, 560);
 }
 
-Gdiplus::SolidBrush* GameConstants::getWhiteBrush()
+const Gdiplus::SolidBrush* GameConstants::getWhiteBrush()
 {
   static Gdiplus::SolidBrush* whitebrush = new Gdiplus::SolidBrush(Gdiplus::Color(255, 255, 255));
   return whitebrush;
@@ -60,9 +60,22 @@ Gdiplus::SolidBrush * GameConstants::getTranspBrush()
   return transpbrush;
 }
 
+const Gdiplus::Font* GameConstants::getStandartFont()
+{
+  Gdiplus::FontFamily  fontFamily(L"Times New Roman");
+  Gdiplus::Font stdfont(&fontFamily, 28, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+  return &stdfont;
+}
+
 const int GameConstants::getTankSize()
 {
   return 30;
+}
+
+const Gdiplus::PointF& GameConstants::getTimeStringPoint()
+{
+  Gdiplus::PointF point(10, 610);
+  return point;
 }
 
 const int GameConstants::getPlayerStartingPosX()

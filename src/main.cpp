@@ -2,18 +2,14 @@
 #include <thread>
 
 #include "GraphicsController.h"
-#include "WallsGeneration.h"
-#include "TanksGeneration.h"
 
 int main() {
-
-  GraphicsController graphicController;
 
   GameController::getInstance().gameInitialization();
 
   while (true) {
 
-    graphicController.DrawFrame( 
+    GraphicsController::getInstance().DrawFrame( 
                                 GameController::getInstance().wallVect,
                                 GameController::getInstance().tankVect,
                                 GameController::getInstance().missileVect,

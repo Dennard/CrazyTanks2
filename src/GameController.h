@@ -1,6 +1,9 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
+#include <thread>
+#include <chrono>
+
 #include "Generator.h"
 #include "Player.h"
 #include "Missile.h"
@@ -24,6 +27,8 @@ public:
 
   void checkMissilesCollision();
 
+  static void calculateTime(int& seconds, int& minutes);
+
 private:
 
   static GameController * p_instance;
@@ -33,6 +38,8 @@ private:
   GameController& operator=(GameController&);
   ~GameController();
 
+  int seconds;
+  int minutes;
 };
 
 #endif

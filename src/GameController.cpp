@@ -1,6 +1,6 @@
-#include "GameController.h"
+#include "GraphicsController.h"
 #include <conio.h>
-#include <thread>
+
 
 GameController* GameController::p_instance = nullptr;
 
@@ -42,6 +42,20 @@ void GameController::getControlKeys(Player& player,
   }
 }
 
+
+void GameController::calculateTime(int& seconds, int& minutes)
+{
+  while (true) {
+    if (seconds > 59) {
+      seconds = 0;
+      minutes++;
+    }
+    seconds++;
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
+}
+
+
 void GameController::gameInitialization()
 {
   std::unique_ptr<Generator> wall_gen(new Generator(new WallsGeneration));
@@ -49,12 +63,17 @@ void GameController::gameInitialization()
   std::unique_ptr<Generator> tank_gen(new Generator(new TanksGeneration));
   tank_gen->generateGameObjects(10, wallVect, tankVect);
 
+  std::thread time_thread(calculateTime,
+    std::ref(GraphicsController::getInstance().seconds),
+    std::ref(GraphicsController::getInstance().minutes));
+  time_thread.detach();
   std::thread controls_thread(getControlKeys,
                               std::ref(Player::getInstance()),
                               std::ref(wallVect),
                               std::ref(tankVect),
                               std::ref(missileVect));
   controls_thread.detach();
+
 }
 
 void GameController::checkMissilesCollision()
