@@ -20,6 +20,8 @@ public:
                             std::vector<std::shared_ptr<Tank>>& tankVect,
                             std::vector<std::shared_ptr<Missile>>& missVect);
 
+  void gameInitialization();
+
   void checkMissilesCollision();
 
 private:

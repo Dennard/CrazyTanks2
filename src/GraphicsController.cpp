@@ -7,6 +7,7 @@ GraphicsController::GraphicsController()
   hwnd = GetConsoleWindow();
   hdc = GetDC(hwnd);
   mem_DC = CreateCompatibleDC(hdc);
+  system("mode con lines=50 cols=75");
 }
 
 GraphicsController::~GraphicsController()

@@ -10,6 +10,7 @@ public:
   HWND hwnd;
   GraphicsController();
   ~GraphicsController();
+
   void DrawFrame( 
                 std::vector<std::shared_ptr<Wall>>& wallvect,
                 std::vector<std::shared_ptr<Tank>>& tankvect,
@@ -17,7 +18,6 @@ public:
                 Player& player);
 
 private:
-
   ULONG_PTR m_gdiplusToken;
 };
 

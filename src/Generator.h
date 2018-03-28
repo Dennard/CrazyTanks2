@@ -1,7 +1,8 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
-#include "Generation.h"
+#include "WallsGeneration.h"
+#include "TanksGeneration.h"
 
 class Generator {
 public:

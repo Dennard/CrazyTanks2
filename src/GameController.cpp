@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include <conio.h>
+#include <thread>
 
 GameController* GameController::p_instance = nullptr;
 
@@ -41,16 +42,31 @@ void GameController::getControlKeys(Player& player,
   }
 }
 
+void GameController::gameInitialization()
+{
+  std::unique_ptr<Generator> wall_gen(new Generator(new WallsGeneration));
+  wall_gen->generateGameObjects(15, wallVect, tankVect);
+  std::unique_ptr<Generator> tank_gen(new Generator(new TanksGeneration));
+  tank_gen->generateGameObjects(10, wallVect, tankVect);
+
+  std::thread controls_thread(getControlKeys,
+                              std::ref(Player::getInstance()),
+                              std::ref(wallVect),
+                              std::ref(tankVect),
+                              std::ref(missileVect));
+  controls_thread.detach();
+}
+
 void GameController::checkMissilesCollision()
 {
   if (missileVect.size() > 0) {
     for (int i = 0; i < missileVect.size(); i++) {
       int count = missileVect.size();
       if (missileVect.size() > 0) {
-        if (missileVect[i]->getRect().Y <= 20 ||
-          missileVect[i]->getRect().Y >= 570 ||
-          missileVect[i]->getRect().X >= 570 ||
-          missileVect[i]->getRect().X <= 20) {
+        if (missileVect[i]->getRect().IntersectsWith(GameConstants::getDownBorderRect()) ||
+          missileVect[i]->getRect().IntersectsWith(GameConstants::getLeftBorderRect()) ||
+          missileVect[i]->getRect().IntersectsWith(GameConstants::getRightBorderRect()) ||
+          missileVect[i]->getRect().IntersectsWith(GameConstants::getUpperBorderRect())) {
           missileVect.erase(missileVect.begin() + i);
           break;
         }
