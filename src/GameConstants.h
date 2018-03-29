@@ -26,7 +26,7 @@ public:
 
   static const int getTankSize();
 
-  static const Gdiplus::PointF& getTimeStringPoint();
+  static const Gdiplus::PointF* getTimeStringPoint();
 
   static const int getPlayerStartingPosX();
   static const int getPlayerStartingPosY();

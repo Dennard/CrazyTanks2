@@ -63,8 +63,8 @@ Gdiplus::SolidBrush * GameConstants::getTranspBrush()
 const Gdiplus::Font* GameConstants::getStandartFont()
 {
   Gdiplus::FontFamily  fontFamily(L"Times New Roman");
-  Gdiplus::Font stdfont(&fontFamily, 28, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
-  return &stdfont;
+  Gdiplus::Font* stdfont = new Gdiplus::Font(&fontFamily, 28, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+  return stdfont;
 }
 
 const int GameConstants::getTankSize()
@@ -72,9 +72,9 @@ const int GameConstants::getTankSize()
   return 30;
 }
 
-const Gdiplus::PointF& GameConstants::getTimeStringPoint()
+const Gdiplus::PointF* GameConstants::getTimeStringPoint()
 {
-  Gdiplus::PointF point(10, 610);
+  Gdiplus::PointF* point = new Gdiplus::PointF(10, 610);
   return point;
 }
 

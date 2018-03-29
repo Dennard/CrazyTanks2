@@ -78,9 +78,9 @@ void GraphicsController::DrawFrame(
   stime.unlock();
   Gdiplus::PointF ptf(10, 610);
   Gdiplus::FontFamily  fontFamily(L"Times New Roman");
-  Gdiplus::Font stdfont(&fontFamily, 28, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
-  buf.DrawString(chr, -1, &stdfont,
-    GameConstants::getTimeStringPoint(),
+  //Gdiplus::Font stdfont(&fontFamily, 28, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+  buf.DrawString(chr, -1, GameConstants::getStandartFont(),
+    *GameConstants::getTimeStringPoint(),
     GameConstants::getWhiteBrush());
 
   main.DrawImage(&buffer, 0, 0, 0, 0, 

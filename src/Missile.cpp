@@ -46,16 +46,16 @@ void Missile::move()
 {
   switch (missDirection) {
   case UP:
-    getRect().Y -= 3;
+    getRect().Y -= 20;
     break;
   case DOWN:
-    getRect().Y += 3;
+    getRect().Y += 20;
     break;
   case LEFT:
-    getRect().X -= 3;
+      getRect().X -= 20;
     break;
   case RIGHT:
-    getRect().X += 3;
+    getRect().X += 20;
     break;
   }
 }
